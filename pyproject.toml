@@ -13,6 +13,7 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.7"
 poetry = "^1.2.0b1dev0"
+"keyrings.google-artifactregistry-auth" = "^1.0.0"
 
-[tool.poetry.plugins."poetry.application.plugin"]
-plugin = "poetry_artifactregistry_plugin.plugins:ArtifactRegistryApplicationPlugin"
+[tool.poetry.plugins."poetry.plugin"]
+demo = "poetry_artifactregistry_plugin.plugins:ArtifactRegistryPlugin"

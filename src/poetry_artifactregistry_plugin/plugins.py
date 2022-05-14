@@ -1,21 +1,14 @@
-from cleo.commands.command import Command
-from poetry.plugins.application_plugin import ApplicationPlugin
+from cleo.io.io import IO
 
+from poetry.plugins.plugin import Plugin
+from poetry.poetry import Poetry
 
-class ArtifactRegistryCommand(Command):
+from poetry_artifactregistry_plugin.gcloud import existing_gcloud
 
-    name = "artifactregistry"
+class ArtifactRegistryPlugin(Plugin):
 
-    def handle(self) -> int:
-        self.line("My command")
-
-        return 0
-
-
-def factory():
-    return ArtifactRegistryCommand()
-
-
-class ArtifactRegistryApplicationPlugin(ApplicationPlugin):
-    def activate(self, application):
-        application.command_loader.register_factory("artifactregistry", factory)
+    def activate(self, poetry: Poetry, io: IO):
+        if not existing_gcloud():
+            io.write_error_line(f'<comment>poetry-artifactregistry-plugin</comment> requires <b><error>gcloud</error></b> to be functionnal.')
+            io.write_error_line('Please follow instructions at [<info>https://cloud.google.com/sdk/docs/install?hl=en</info>] to use this plugin.')
+            return
