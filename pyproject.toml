@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "poetry-artifactregistry-plugin"
+version = "0.1.0"
+description = "This repository is a plugin to configure poetry and Google Artifact Registry authentication"
+authors = ["Julien Klaer <klaer.julien@gmail.com>"]
+readme = "README.md"
+license = "MIT"
+
+packages = [
+    { include = "poetry_artifactregistry_plugin", from = "src" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+poetry = "^1.2.0b1dev0"
+
+[tool.poetry.plugins."poetry.application.plugin"]
+plugin = "poetry_artifactregistry_plugin.plugins:ArtifactRegistryApplicationPlugin"
